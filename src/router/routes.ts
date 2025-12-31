@@ -1,17 +1,21 @@
-import type { RouteRecordRaw } from 'vue-router';
+import MainLayout from 'layouts/MainLayout.vue';
 
-const routes: RouteRecordRaw[] = [
+import DashboardPage from 'pages/DashboardPage.vue';
+import RequestsPage from 'pages/RequestsPage.vue';
+import NewRequestPage from 'pages/NewRequestPage.vue';
+import ProfilePage from 'pages/ProfilePage.vue';
+
+const routes = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/IndexPage.vue') }],
-  },
-
-  // Always leave this as last one,
-  // but you can also remove it
-  {
-    path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue'),
+    component: MainLayout,
+    children: [
+      { path: '', redirect: '/dashboard' },
+      { path: 'dashboard', component: DashboardPage },
+      { path: 'requests', component: RequestsPage },
+      { path: 'requests/new', component: NewRequestPage },
+      { path: 'profile', component: ProfilePage },
+    ],
   },
 ];
 
